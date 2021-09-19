@@ -1,110 +1,94 @@
 <script lang="ts">
-import { useI18n } from 'vue-i18n';
-
-import { defineComponent, ref } from 'vue';
-import { useTheme } from '/@/composables';
+import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
+import { Box, Camera, LambertMaterial, PointLight, Renderer, Scene, AmbientLight, BasicMaterial,
+Texture, Sphere } from 'troisjs';
+import  { NumberField} from '@asigloo/vue-dynamic-forms';
 
 export default defineComponent({
   name: 'Home',
+  components: { Box, Camera, LambertMaterial, PointLight, Renderer, Scene, AmbientLight, BasicMaterial,
+Texture, Sphere },
   setup() {
-    const { t, availableLocales, locale } = useI18n();
+    const renderer = ref(null);
+    const box = ref(null);
+    const sphere = ref(null);
 
-    const toggleLocales = () => {
-      const locales = availableLocales;
-      locale.value =
-        locales[(locales.indexOf(locale.value) + 1) % locales.length];
-    };
+    const boxRotation = ref(0.01);
 
-    const { toggleDark } = useTheme();
+    onMounted(() => {
+      renderer?.value?.onBeforeRender(() => {
+        box.value.mesh.rotation.x += boxRotation.value;
+        sphere.value.mesh.rotation.y += 0.001;
+      });
+    })
 
-    const show = ref(false);
+    const spherePosition = reactive({
+      spherePosX: -10,
+      spherePosY: -10,
+      spherePosZ: -10,
+    });
 
-    setTimeout(() => {
-      show.value = true;
-    }, 1000);
+     const form = computed(() => ({
+      id: 'basic-demo',
+      fields: {
+        spherePosX: NumberField({
+          label: 'Sphere Position X',
+          value: -10
+        }),
+         spherePosY: NumberField({
+          label: 'Sphere Position Y',
+          value: -10
+        }),
+         spherePosZ: NumberField({
+          label: 'Sphere Position Z',
+          value: -10
+        }),
+        boxRotation: NumberField({
+          label: 'Box rotation factor',
+          value: 0.01
+        }),
+      },
+    }));
 
-    return { t, show, toggleLocales, toggleDark };
-  },
+    function valueChanged(values) {
+      Object.assign(spherePosition, values);
+      boxRotation.value = values.boxRotation;
+    }
+
+    return { renderer, box, sphere, form, valueChanged, spherePosition };
+  }
 });
 </script>
 <template>
-  <div class="container max-w-3xl mx-auto mt-60">
-    <div class="h-60 mb-8">
-      <transition
-        enter-active-class="transition ease-out duration-1000 transform"
-        enter-from-class="-translate-x-100 opacity-0"
-        enter-to-class="translate-x-0 opacity-100"
-        leave-active-class="transition ease-in duration-1000 transform"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <img
-          v-if="show"
-          alt="Vitesome logo"
-          class="w-52 mx-auto mb-12"
-          :src="'imagotype.svg'"
+  <div class="space relative">
+    <div class="bg-white p-4 px-8 rounded w-1/3 shadow-lg fixed right-2 top-2">
+      <DynamicForm
+          :form="form"
+          @change="valueChanged"
         />
-      </transition>
     </div>
-
-    <HelloWorld :msg="t('hello') + ' 👋 ' + t('welcome')" />
-
-    <footer class="text-center">
-      <ul class="flex justify-between w-1/3 mx-auto mb-8">
-        <li class="cursor-pointer text-2xl">
-          <a
-            href="#"
-            @click="toggleLocales"
-            class="footer-link text-cyan-700 hover:text-cyan-500"
-            :title="t('toggle_language')"
-          >
-            <i class="iconify" :data-icon="'ant-design:translation-outlined'" />
-          </a>
-        </li>
-        <li class="cursor-pointer text-2xl">
-          <a
-            href="#"
-            @click="toggleDark"
-            class="text-cyan-700 hover:text-cyan-500"
-            :title="t('toggle_theme')"
-          >
-            <i class="iconify" :data-icon="'mdi:theme-light-dark'" />
-          </a>
-        </li>
-        <li class="cursor-pointer text-2xl">
-          <a
-            href="https://github.com/alvarosaburido"
-            rel="noreferrer"
-            target="_blank"
-            class="footer-link text-cyan-700 hover:text-cyan-500"
-            title="Github repo"
-          >
-            <i class="iconify" :data-icon="'mdi:github'" />
-          </a>
-        </li>
-      </ul>
-
-      <span class="text-xs"
-        >{{ t('made_by') }}
-        <a
-          class="footer-link text-cyan-400 hover:text-cyan-500"
-          href="https://github.com/alvarosaburido"
-          rel="noreferrer"
-          target="_blank"
-          >Alvaro Saburido</a
-        ></span
-      >
-    </footer>
+    <Renderer resize="window" orbit-ctrl ref="renderer" alpha="0">
+      <Camera :position="{ z: 10 }" />
+      <Scene>
+        <PointLight :position="{ y: 50, z: 50 }" />
+         <AmbientLight />
+        <Box ref="box" :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }">
+          <BasicMaterial>
+            <Texture src="/ink.jpg" refraction :refraction-ratio="0.95" />
+          </BasicMaterial>
+        </Box>
+        <Sphere ref="sphere" :position="{ x: spherePosition.spherePosX, y: spherePosition.spherePosY, z: spherePosition.spherePosZ }" :radius="10">
+          <BasicMaterial>
+            <Texture src="/splash-bg.jpg" refraction :refraction-ratio="0.95" />
+          </BasicMaterial>
+        </Sphere>
+      </Scene>
+    </Renderer>
   </div>
 </template>
 
 <style>
-a,
-.footer-link {
-  @apply transition-all ease-out duration-100;
-}
-
-.footer-link {
-  opacity: 0.8;
+.space {
+  background-image: url('/space-dust.png')
 }
 </style>

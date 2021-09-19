@@ -9,6 +9,14 @@
   dependencies:
     "@types/throttle-debounce" "^2.1.0"
 
+"@asigloo/vue-dynamic-forms@^3.16.3":
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/@asigloo/vue-dynamic-forms/-/vue-dynamic-forms-3.16.3.tgz#af7290d8261257fc2508808345c3420ed6a79385"
+  integrity sha512-+anpO/RZiP6S2VvERHW+N56g8mNnIJM1aTyd3UhhKEAvpTZ1iBoFBi1Ic97IxUZhto3XF+ZuN5e5F5rdykir0g==
+  dependencies:
+    deep-clone "^3.0.3"
+    deep-object-diff "^1.1.0"
+
 "@babel/helper-validator-identifier@^7.14.0":
   version "7.14.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.14.0.tgz#d26cad8a47c65286b15df1547319a5d0bcf27288"
@@ -804,6 +812,16 @@ debug@^4.3.2:
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
   dependencies:
     ms "2.1.2"
+
+deep-clone@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/deep-clone/-/deep-clone-3.0.3.tgz#c13d7797625b66e955c5f6f52bfad028eb1166bb"
+  integrity sha512-6jtXIlCBAwr3GP/7Il52clbIFIKAxg/pnNkL4/sE6+Oqb10MXMtm9LDZV2IAuwdaKV9VBm8hlxAFk9r6pF8XRw==
+
+deep-object-diff@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/deep-object-diff/-/deep-object-diff-1.1.0.tgz#d6fabf476c2ed1751fc94d5ca693d2ed8c18bc5a"
+  integrity sha512-b+QLs5vHgS+IoSNcUE4n9HP2NwcHj7aqnJWsjPtuG75Rh5TOaGt0OjAYInh77d5T16V5cRDC+Pw/6ZZZiETBGw==
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -1791,6 +1809,11 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
+three@0.127:
+  version "0.127.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.127.0.tgz#c463f4d41b2c735dcf8e9e51a388815e80cd3791"
+  integrity sha512-wtgrn+mhYUbobxT7QN3GPdu3SRpSBQvwY6uOzLChWS7QE//f7paDU/+wlzbg+ngeIvBBqjBHSRuywTh8A99Jng==
+
 to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
@@ -1812,6 +1835,11 @@ tree-kill@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
+
+troisjs@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/troisjs/-/troisjs-0.3.2.tgz#c2c3235ae4f2e92349a860701a87ff3dd95e4aa7"
+  integrity sha512-RF+r6tZvODVG1kwiz2BacxJTzap5UIlhIX3v9dmU/t4guIkeAA8VB8dy441vl+gPpQEuavOF5EkCs83bu3f5nQ==
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"

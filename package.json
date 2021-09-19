@@ -8,11 +8,14 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "three": "0.127",
+    "troisjs": "^0.3.2",
     "vue": "^3.2.6",
     "vue-i18n": "^9.2.0-beta.3",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
+    "@asigloo/vue-dynamic-forms": "^3.16.3",
     "@iconify/iconify": "^2.0.3",
     "@iconify/json": "^1.1.393",
     "@intlify/vite-plugin-vue-i18n": "^2.4.0",

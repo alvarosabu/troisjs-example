@@ -17,6 +17,20 @@ import 'virtual:windi-devtools';
 
 const app = createApp(App);
 
+// Dynamic Forms
+import { createDynamicForms } from '@asigloo/vue-dynamic-forms';
+
+const VueDynamicForms = createDynamicForms({
+  autoValidate: true,
+  form: {
+    method: 'POST',
+    netlify: false,
+    netlifyHoneypot: null,
+  },
+});
+
+app.use(VueDynamicForms)
+
 //
 const i18n = createI18n({
   locale: 'en',
